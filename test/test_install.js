@@ -31,7 +31,7 @@ describe("Install", function() {
   });
 
   it("installs eth-usd correctly with owned as a dependency", function() {
-    var dependency_path = path.resolve(path.join(eth_usd.config.installed_packages_directory, "owned-1.0.0"));
+    var dependency_path = path.resolve(path.join(eth_usd.config.installed_packages_directory, "owned"));
 
     return EPM.installPackage(eth_usd.config).then(function() {
       return new Promise(function(accept, reject) {

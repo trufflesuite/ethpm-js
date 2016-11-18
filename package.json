@@ -1,13 +1,10 @@
 {
-  "name": "epm",
+  "name": "ethpm",
   "version": "0.0.1",
   "description": "Ethereum Package Installer and Publisher",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
-  },
-  "bin": {
-    "epm": "./bin/epm"
   },
   "repository": {
     "type": "git",
