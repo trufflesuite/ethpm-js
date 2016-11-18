@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ethpm/epm.git"
+    "url": "git+https://github.com/ethpm/ethpm-js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ethpm/epm/issues"
+    "url": "https://github.com/ethpm/ethpm-js/issues"
   },
-  "homepage": "https://github.com/ethpm/epm#readme",
+  "homepage": "https://github.com/ethpm/ethpm-js#readme",
   "devDependencies": {
     "ethereumjs-testrpc": "^3.0.1",
     "finalhandler": "^0.5.1",
