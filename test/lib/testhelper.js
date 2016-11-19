@@ -53,6 +53,8 @@ var TestHelper = {
       this.timeout(20000);
 
       ipfsd.disposableApi(function (err, ipfs) {
+        if (err) return done(err);
+
         helper.ipfs_server = ipfs;
 
         helper.host = new IPFSHost({
