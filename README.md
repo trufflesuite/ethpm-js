@@ -34,6 +34,6 @@ EthPM.publishPackage(config, contract_metadata);
 
 ### Contributors
 
-Initial author: Tim Coulter (@tcoulter)
+Initial author: Tim Coulter ([@tcoulter](https://github.com/tcoulter))
 
 This is a joint effort by Truffle, Populus, Dapple and Eris.
