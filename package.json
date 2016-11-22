@@ -26,6 +26,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "fs-extra": "^1.0.0",
+    "glob": "^7.1.1",
     "ipfs": "^0.18.0",
     "ipfs-api": "^11.1.0",
     "lodash": "^4.17.1",
