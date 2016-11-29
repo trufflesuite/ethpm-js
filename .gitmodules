@@ -1,0 +1,3 @@
+[submodule "use-cases/owned-example"]
+	path = use-cases/owned-example
+	url = https://github.com/ethpm/example-package-owned.git
