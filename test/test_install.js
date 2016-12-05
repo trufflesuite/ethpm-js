@@ -27,13 +27,13 @@ describe("Install", function() {
   before("published owned for use as a dependency", function() {
     this.timeout(10000);
 
-    return EPM.publishPackage(owned.config, owned.contract_metadata);
+    return owned.package.publish(owned.contract_metadata);
   });
 
   it("installs eth-usd correctly with owned as a dependency", function() {
-    var dependency_path = path.resolve(path.join(eth_usd.config.installed_packages_directory, "owned"));
+    var dependency_path = path.resolve(path.join(eth_usd.package.config.installed_packages_directory, "owned"));
 
-    return EPM.installPackage(eth_usd.config).then(function() {
+    return eth_usd.package.install().then(function() {
       return new Promise(function(accept, reject) {
         dir.files(dependency_path, function(err, files) {
           if (err) return reject(err);
@@ -43,11 +43,14 @@ describe("Install", function() {
     }).then(function(files) {
       var assertions = [];
 
-      assert.equal(files.length, 4); // three contracts and their epm.json
+      assert.equal(files.length, 5); // three contracts, their epm.json and lock.json
 
       files.forEach(function(file) {
+        // TODO: Assert contents of lock.json.
+        if (file.indexOf("lock.json") >= 0) return;
+
         var relative_file_path = path.relative(dependency_path, file);
-        var expected_example_path = path.join(owned.config.working_directory, relative_file_path);
+        var expected_example_path = path.join(owned.package.config.working_directory, relative_file_path);
 
         assertions.push(helper.assertFilesMatch(expected_example_path, file));
       });

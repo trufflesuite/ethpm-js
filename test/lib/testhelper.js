@@ -1,7 +1,8 @@
 var ipfsd = require('ipfsd-ctl')
+var EPM = require("../../index.js");
 var Config = require("../../lib/config");
 var IPFSHost = require("../../lib/hosts/ipfshost");
-var DumbRegistry = require("../../lib/registries/dumbregistry");
+var MemoryRegistry = require("../../lib/registries/memoryregistry");
 var path = require("path");
 var promisify = require("promisify-node");
 var fs = promisify(require("fs-extra"));
@@ -62,7 +63,7 @@ var TestHelper = {
           port: helper.ipfs_server.apiPort
         });
 
-        helper.registry = new DumbRegistry();
+        helper.registry = new MemoryRegistry();
 
         done(err);
       });
@@ -71,7 +72,7 @@ var TestHelper = {
     package_names.forEach(function(package_name) {
       var original_package_path = path.resolve(path.join(__dirname, "../", "../", "use-cases", package_name));
       var package_data = {
-        config: null,
+        package: null,
         contract_metadata: {},
         package_path: ""
       };
@@ -86,11 +87,7 @@ var TestHelper = {
       });
 
       before("set up config", function() {
-        package_data.config = Config.default().with({
-          working_directory: path.resolve(package_data.package_path),
-          host: helper.host,
-          registry: helper.registry
-        });
+        package_data.package = new EPM(path.resolve(package_data.package_path), helper.host, helper.registry);
       });
 
       before("generate contract metadata", function(done) {
@@ -100,7 +97,7 @@ var TestHelper = {
 
         var sources = {};
 
-        dir.files(package_data.config.contracts_directory, function(err, files) {
+        dir.files(package_data.package.config.contracts_directory, function(err, files) {
           if (err) return done(err);
 
           each(files, function(file, finished) {

@@ -10,9 +10,6 @@
     "sources": [
       "./contracts"
     ],
-    "contracts": [
-        "PriceOracle"
-    ],
     "dependencies": {
       "owned": "1.0.0"
     }

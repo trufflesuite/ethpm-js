@@ -22,7 +22,7 @@ describe("Publishing", function() {
   before("make the publish request", function() {
     this.timeout(10000);
 
-    return EPM.publishPackage(owned.config, owned.contract_metadata);
+    return owned.package.publish(owned.contract_metadata);
   });
 
   it("published the correct lockfile, manifest file and source files", function() {
@@ -40,7 +40,7 @@ describe("Publishing", function() {
       return helper.host.get(lockfile.package_manifest);
     }).then(function(data) {
       var manifest = JSON.parse(data);
-      var expected_manifest = require(owned.config.manifest_file);
+      var expected_manifest = require(owned.package.config.manifest_file);
 
       Object.keys(expected_manifest).forEach(function(key) {
         var expected_value = expected_manifest[key];
@@ -54,7 +54,7 @@ describe("Publishing", function() {
       assert.equal(Object.keys(lockfile.sources).length, 3);
 
       Object.keys(lockfile.sources).forEach(function(relative_path) {
-        var full_path = path.resolve(path.join(owned.config.base_path, relative_path));
+        var full_path = path.resolve(path.join(owned.package.config.base_path, relative_path));
         var sourceURI = lockfile.sources[relative_path];
 
         promises.push(helper.assertHostMatchesFilesystem(sourceURI, full_path));
