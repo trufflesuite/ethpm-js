@@ -8,11 +8,11 @@ var fs = require("fs-extra");
 describe("Install", function() {
   var helper = TestHelper.setup({
     packages: [
-      "owned-example",
-      "eth-usd-oracle-example"
+      "owned-1.0.0",
+      "eth-usd-oracle-1.0.0"
     ],
     compile: [
-      "owned-example"
+      "owned-1.0.0"
     ]
   });
 
@@ -20,8 +20,8 @@ describe("Install", function() {
   var eth_usd;
 
   before("setup variables once previous steps are finished", function() {
-    owned = helper.packages["owned-example"];
-    eth_usd = helper.packages["eth-usd-oracle-example"];
+    owned = helper.packages["owned-1.0.0"];
+    eth_usd = helper.packages["eth-usd-oracle-1.0.0"];
   });
 
   before("published owned for use as a dependency", function() {

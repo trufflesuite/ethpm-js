@@ -1,0 +1,11 @@
+{
+  "license": "MIT",
+  "lock_file_version": "1",
+  "package_manifest": "ipfs://QmcNZze91jpM9CBBouKcrizPh5dcDcjVjkgHQGs4dgorSH",
+  "sources": {
+    "./contracts/mortal.sol": "ipfs://Qmdc7HRvuXi6VfzwEX2TFctLzBpGnxPPd13kxpbPJr8qtu",
+    "./contracts/owned.sol": "ipfs://Qmd4GzLVsiGSjfYN4ZNwNcDzmYq9qmD4DphQ61bteDaZiu",
+    "./contracts/transferable.sol": "ipfs://QmXdQLjimXye61UFddL18PfknDTQevpZnTjhzEEiNJA3Yz"
+  },
+  "version": "1.0.0"
+}

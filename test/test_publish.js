@@ -6,17 +6,17 @@ var assert = require("assert");
 describe("Publishing", function() {
   var helper = TestHelper.setup({
     packages: [
-      "owned-example",
+      "owned-1.0.0",
     ],
     compile: [
-      "owned-example"
+      "owned-1.0.0"
     ]
   });
 
   var owned;
 
   before("setup variables once previous steps are finished", function() {
-    owned = helper.packages["owned-example"];
+    owned = helper.packages["owned-1.0.0"];
   });
 
   before("make the publish request", function() {
