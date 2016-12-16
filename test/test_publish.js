@@ -2,11 +2,13 @@ var TestHelper = require('./lib/testhelper');
 var EPM = require('../index.js');
 var path = require("path");
 var assert = require("assert");
+var Sources = require("../lib/sources");
 
 describe("Publishing", function() {
   var helper = TestHelper.setup({
     packages: [
       "owned-1.0.0",
+      "eth-usd-oracle-1.0.0"
     ],
     compile: [
       "owned-1.0.0"
@@ -14,21 +16,23 @@ describe("Publishing", function() {
   });
 
   var owned;
+  var eth_usd;
 
   before("setup variables once previous steps are finished", function() {
     owned = helper.packages["owned-1.0.0"];
-  });
-
-  before("make the publish request", function() {
-    this.timeout(10000);
-
-    return owned.package.publish(owned.contract_metadata);
+    eth_usd = helper.packages["eth-usd-oracle-1.0.0"];
   });
 
   it("published the correct lockfile, manifest file and source files", function() {
+    this.timeout(10000);
+
     var lockfile;
 
-    return helper.registry.getLockfileURI("owned", "1.0.0").then(function(lockfileURI) {
+    // Publish the package.
+    return owned.package.publish(owned.contract_metadata).then(function() {
+      // Now check the registry
+      return helper.registry.getLockfileURI("owned", "1.0.0");
+    }).then(function(lockfileURI) {
       return helper.host.get(lockfileURI);
     }).then(function(data) {
       lockfile = JSON.parse(data);
@@ -61,6 +65,30 @@ describe("Publishing", function() {
       });
 
       return Promise.all(promises);
+    });
+  });
+
+  it("correctly publishes packages with dependencies", function(){
+    // First install any dependencies.
+    return eth_usd.package.install().then(function() {
+      return Sources.findDirectories(eth_usd.package.config.installed_packages_directory);
+    }).then(function(installed_packages) {
+      installed_packages = installed_packages.map(function(dir) {
+        return dir.replace(eth_usd.package.config.installed_packages_directory + path.sep, "");
+      });
+
+      assert.deepEqual(installed_packages, ["owned"], "Expected the `owned` dependency to be installed.");
+
+      // Now publish it.
+      return eth_usd.package.publish();
+    }).then(function() {
+      return helper.registry.getLockfileURI("eth-usd-oracle", "1.0.0");
+    }).then(function(lockfileURI) {
+      return helper.host.get(lockfileURI);
+    }).then(function(data) {
+      lockfile = JSON.parse(data);
+
+      // TODO: Verify build dependencies are correct.
     });
   });
 

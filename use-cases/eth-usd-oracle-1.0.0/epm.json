@@ -8,7 +8,8 @@
     ],
     "description": "Oracle of current ETH prices in USD.",
     "sources": [
-      "./contracts"
+      "./contracts/*.sol",
+      "./contracts/**/*.sol"
     ],
     "dependencies": {
       "owned": "1.0.0"

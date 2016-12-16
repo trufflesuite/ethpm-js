@@ -45,7 +45,7 @@ Helper.prototype.assertFilesMatch = function(expected, actual) {
 var TestHelper = {
   setup: function(packages_to_setup) {
     var package_names = packages_to_setup.packages;
-    var compile = packages_to_setup.compile;
+    var compile = packages_to_setup.compile || [];
 
     var helper = new Helper();
 

@@ -1,0 +1,22 @@
+{
+  "authors": [
+    "Tim Coulter <tim.coulter@consensys.net>"
+  ],
+  "description": "Package whose dependencies have dependencies that conflict.",
+  "keywords": [
+    "dependency",
+    "conflict"
+  ],
+  "license": "MIT",
+  "manifest_version": 1,
+  "package_name": "dependency-conflict",
+  "sources": [
+    "./contracts/*.sol",
+    "./contracts/**/*.sol"
+  ],
+  "dependencies": {
+    "owned": "2.0.0",
+    "eth-usd-oracle": "1.0.0"
+  },
+  "version": "2.0.0"
+}

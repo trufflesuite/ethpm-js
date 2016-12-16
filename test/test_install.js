@@ -43,11 +43,12 @@ describe("Install", function() {
     }).then(function(files) {
       var assertions = [];
 
-      assert.equal(files.length, 5); // three contracts, their epm.json and lock.json
+      assert.equal(files.length, 6); // three contracts, their epm.json, their lock.json and lock.uri
 
       files.forEach(function(file) {
-        // TODO: Assert contents of lock.json.
+        // TODO: Assert contents of lock.json and lock.uri.
         if (file.indexOf("lock.json") >= 0) return;
+        if (file.indexOf("lock.uri") >= 0) return;
 
         var relative_file_path = path.relative(dependency_path, file);
         var expected_example_path = path.join(owned.package.config.working_directory, relative_file_path);
