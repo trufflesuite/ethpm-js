@@ -44,7 +44,6 @@ describe("Dependency Conflict", function() {
     conflict.package.install().then(function() {
       return done(new Error("This error shouldn't be evaluated because another error should have come before it."));
     }).catch(function(e) {
-      console.log(e.stack);
       assert(e.message.indexOf("Your package and its dependencies require conflicting versions of") >= 0, "Got an unexpected error: " + e.message);
       done();
     }).catch(done);
