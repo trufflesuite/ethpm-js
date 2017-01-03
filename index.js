@@ -34,11 +34,9 @@ _.extend(EthPM.prototype, {
   // Publish the current package to the host and registry.
   // Contract metadata is also required for all contracts listed in the `contracts` portion of the manifest.
   // Returns a Promise.
-  publish: function(contract_metadata) {
-    contract_metadata = contract_metadata || {};
-
-    var publisher = new Publisher(this.config.registry, this.config.host, contract_metadata);
-    return publisher.publish(this.config);
+  publish: function(contract_types, deployments) {
+    var publisher = new Publisher(this.config.registry, this.config.host);
+    return publisher.publish(this.config, contract_types, deployments);
   }
 });
 
