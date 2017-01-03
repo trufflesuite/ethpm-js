@@ -8,10 +8,10 @@ var fs = require("fs-extra");
 describe("Dependency Conflict", function() {
   var helper = TestHelper.setup({
     packages: [
-      "dependency-conflict-2.0.0",
-      "owned-1.0.0",
-      "owned-2.0.0",
-      "eth-usd-oracle-1.0.0"
+      "custom-use-cases/dependency-conflict-2.0.0",
+      "custom-use-cases/owned-1.0.0",
+      "custom-use-cases/owned-2.0.0",
+      "custom-use-cases/eth-usd-oracle-1.0.0"
     ]
   });
 

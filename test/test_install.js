@@ -8,8 +8,8 @@ var fs = require("fs-extra");
 describe("Install", function() {
   var helper = TestHelper.setup({
     packages: [
-      "owned-1.0.0",
-      "eth-usd-oracle-1.0.0"
+      "custom-use-cases/owned-1.0.0",
+      "custom-use-cases/eth-usd-oracle-1.0.0"
     ],
     compile: [
       "owned-1.0.0"
@@ -45,16 +45,17 @@ describe("Install", function() {
 
       assert.equal(files.length, 6); // three contracts, their epm.json, their lock.json and lock.uri
 
-      files.forEach(function(file) {
-        // TODO: Assert contents of lock.json and lock.uri.
-        if (file.indexOf("lock.json") >= 0) return;
-        if (file.indexOf("lock.uri") >= 0) return;
+      var lockfile = fs.readFileSync(path.join(dependency_path, "lock.json"), "utf8");
+      lockfile = JSON.parse(lockfile);
 
-        var relative_file_path = path.relative(dependency_path, file);
+      Object.keys(lockfile.sources).forEach(function(relative_file_path) {
         var expected_example_path = path.join(owned.package.config.working_directory, relative_file_path);
+        var actual_path = path.join(dependency_path, relative_file_path);
 
-        assertions.push(helper.assertFilesMatch(expected_example_path, file));
+        assertions.push(helper.assertFilesMatch(expected_example_path, actual_path));
       });
+
+      // TODO: assert contents of lockfile.
 
       return Promise.all(assertions);
     });

@@ -32,6 +32,12 @@ EthPM.installPackage(config);
 EthPM.publishPackage(config, contract_metadata);
 ```
 
+### Running Tests
+
+```
+$ npm test
+```
+
 ### Contributors
 
 Initial author: Tim Coulter ([@tcoulter](https://github.com/tcoulter))

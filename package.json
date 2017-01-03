@@ -4,7 +4,7 @@
   "description": "Ethereum Package Installer and Publishing Library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "git submodule update --init --recursive && mocha"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@ var EPM = require("../../index.js");
 var Config = require("../../lib/config");
 var IPFSHost = require("../../lib/hosts/ipfshost");
 var MemoryRegistry = require("../../lib/registries/memoryregistry");
+var Manifest = require("../../lib/manifest.js");
 var path = require("path");
 var promisify = require("promisify-node");
 var fs = promisify(require("fs-extra"));
@@ -17,7 +18,6 @@ function Helper() {
   this.host = null;
   this.registry = null;
   this.packages = {};
-  this.example_directory = path.resolve(path.join(__dirname, "../", "../", "use-cases"));
 };
 
 Helper.prototype.assertHostMatchesFilesystem = function(sourceURI, source_path) {
@@ -44,7 +44,7 @@ Helper.prototype.assertFilesMatch = function(expected, actual) {
 
 var TestHelper = {
   setup: function(packages_to_setup) {
-    var package_names = packages_to_setup.packages;
+    var package_paths = packages_to_setup.packages;
     var compile = packages_to_setup.compile || [];
 
     var helper = new Helper();
@@ -69,8 +69,16 @@ var TestHelper = {
       });
     });
 
-    package_names.forEach(function(package_name) {
-      var original_package_path = path.resolve(path.join(__dirname, "../", "../", "use-cases", package_name));
+    package_paths.forEach(function(package_path) {
+      package_path = package_path.split("/");
+      package_path = [__dirname, "../", "../"].concat(package_path);
+      var package_name = package_path[package_path.length - 1];
+
+      var original_package_path = path.resolve(path.join.apply(path, package_path));
+
+      // This is only used for epm-spec examples (as of the writing of this comment)
+      var lockfile_path = path.resolve(path.join(original_package_path, "1.0.0.json"));
+
       var package_data = {
         package: null,
         contract_metadata: {},
@@ -84,6 +92,25 @@ var TestHelper = {
           package_data.package_path = temp_path;
           done();
         }).catch(done);
+      });
+
+      before("create epm.json file from lockfile if needed", function(done) {
+        var epmjson_path = path.resolve(path.join(package_data.package_path, "epm.json"));
+
+        // See if there's an epm.json there already.
+        fs.stat(epmjson_path, function(err, stat) {
+          if (err) return done(err);
+          if (stat.isFile()) return done();
+
+          // Doesn't exist, so let's create it from the lockfile.
+          fs.readFile(lockfile_path, "utf8", function(err, body) {
+            if (err) return done(err);
+            var lockfile = JSON.parse(body);
+            var manifest = Manifest.fromLockfile(lockfile);
+
+            fs.writeFile(epmjson_path, JSON.stringify(manifest), "utf8", done);
+          });
+        });
       });
 
       before("set up config", function() {
