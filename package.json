@@ -21,7 +21,8 @@
     "finalhandler": "^0.5.1",
     "ipfsd-ctl": "^0.17.0",
     "mocha": "^3.1.2",
-    "solc": "^0.4.4"
+    "solc": "^0.4.4",
+    "temp": "^0.8.3"
   },
   "dependencies": {
     "async": "^2.1.2",
