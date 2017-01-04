@@ -33,7 +33,7 @@
     "node-dir": "^0.1.16",
     "promisify-node": "^0.4.0",
     "semver": "^5.3.0",
-    "temp": "^0.8.3",
+    "wget-improved": "^1.4.0",
     "yargs": "^6.4.0"
   }
 }
