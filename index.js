@@ -1,3 +1,4 @@
+var Preflight = require("./lib/preflight");
 var Installer = require("./lib/installer");
 var Publisher = require("./lib/publisher");
 var IPFSHost = require("./lib/hosts/ipfshost");
@@ -37,6 +38,18 @@ _.extend(EthPM.prototype, {
   publish: function(contract_types, deployments) {
     var publisher = new Publisher(this.config.registry, this.config.host);
     return publisher.publish(this.config, contract_types, deployments);
+  },
+
+  installed_artifacts: function() {
+    var manifest = {};
+
+    try {
+      manifest = Manifest.read(this.config.manifest_file);
+    } catch (e) {
+      // Do nothing with the error.
+    }
+
+    return Preflight.find_artifacts(this.config.installed_packages_directory, manifest.dependencies);
   }
 });
 
