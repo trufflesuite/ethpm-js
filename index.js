@@ -22,9 +22,9 @@ function EthPM(directory, host, registry) {
 };
 
 _.extend(EthPM.prototype, {
-  install: function() {
+  install: function(manifest) {
     var installer = new Installer(this.config, this.config.installed_packages_directory);
-    return installer.installDependencies();
+    return installer.installDependencies(manifest);
   },
 
   installDependency: function(package_name, version_range) {
