@@ -79,4 +79,5 @@ describe("Publishing", function() {
     });
   });
 
+  // TODO: Test to ensure publishing errors when the package has a bad lockfile.
 });

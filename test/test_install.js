@@ -61,5 +61,5 @@ describe("Install", function() {
     });
   });
 
-
+  // TODO: Test to ensure installation errors when installing a package that has a bad lockfile.
 });
