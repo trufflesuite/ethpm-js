@@ -9,9 +9,5 @@
   "license": "MIT",
   "manifest_version": 1,
   "package_name": "owned",
-  "sources": [
-    "./contracts/*.sol",
-    "./contracts/**/*.sol"
-  ],
   "version": "1.0.0"
 }

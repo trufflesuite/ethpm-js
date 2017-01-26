@@ -58,11 +58,7 @@ var TestHelper = {
 
         helper.ipfs_server = ipfs;
 
-        helper.host = new IPFSHost({
-          host: helper.ipfs_server.apiHost,
-          port: helper.ipfs_server.apiPort
-        });
-
+        helper.host = new IPFSHost(helper.ipfs_server.apiHost, helper.ipfs_server.apiPort);
         helper.registry = new MemoryRegistry();
 
         done(err);
