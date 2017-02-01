@@ -90,10 +90,10 @@ var TestHelper = {
         }).catch(done);
       });
 
-      before("create epm.json file from lockfile if needed", function(done) {
-        var epmjson_path = path.resolve(path.join(package_data.package_path, "epm.json"));
+      before("create ethpm.json file from lockfile if needed", function(done) {
+        var epmjson_path = path.resolve(path.join(package_data.package_path, "ethpm.json"));
 
-        // See if there's an epm.json there already.
+        // See if there's an ethpm.json there already.
         fs.stat(epmjson_path, function(err, stat) {
           if (err) return done(err);
           if (stat.isFile()) return done();
