@@ -8,10 +8,12 @@ describe("Publishing", function() {
   var helper = TestHelper.setup({
     packages: [
       "custom-use-cases/owned-1.0.0",
+      "custom-use-cases/owned-2.0.0",
       "custom-use-cases/eth-usd-oracle-1.0.0"
     ],
     compile: [
-      "owned-1.0.0"
+      "owned-1.0.0",
+      "owned-2.0.0"
     ]
   });
 
@@ -20,6 +22,7 @@ describe("Publishing", function() {
 
   before("setup variables once previous steps are finished", function() {
     owned = helper.packages["owned-1.0.0"];
+    owned2 = helper.packages["owned-2.0.0"];
     eth_usd = helper.packages["eth-usd-oracle-1.0.0"];
   });
 
@@ -52,6 +55,24 @@ describe("Publishing", function() {
       });
 
       return Promise.all(promises);
+    });
+  });
+
+  it("recognizes x-* options in the manifest and includes them in lockfile", function() {
+    this.timeout(10000);
+
+    var lockfile;
+
+    // Publish the package.
+    return owned2.package.publish(owned2.contract_metadata).then(function() {
+      // Now check the registry
+      return helper.registry.getLockfileURI("owned", "2.0.0");
+    }).then(function(lockfileURI) {
+      return helper.host.get(lockfileURI);
+    }).then(function(data) {
+      lockfile = JSON.parse(data);
+
+      assert.equal(lockfile["x-via"], "test-packager");
     });
   });
 
