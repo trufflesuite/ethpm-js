@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "async": "^2.1.2",
-    "ethpm-spec": "^1.0.0",
+    "ethpm-spec": "^1.0.1",
     "fs-extra": "^1.0.0",
     "glob": "^7.1.1",
     "ipfs": "^0.18.0",
