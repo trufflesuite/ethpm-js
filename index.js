@@ -2,6 +2,7 @@ var Preflight = require("./lib/preflight");
 var Installer = require("./lib/installer");
 var Publisher = require("./lib/publisher");
 var IPFSHost = require("./lib/hosts/ipfshost");
+var IPFSHostWithLocalReader = require("./lib/hosts/ipfshostwithlocalreader");
 var MemoryRegistry = require("./lib/registries/memoryregistry");
 var Config = require("./lib/config");
 var promisify = require("promisify-node");
@@ -74,7 +75,8 @@ _.extend(EthPM, {
   },
 
   hosts: {
-    IPFS: IPFSHost
+    IPFS: IPFSHost,
+    IPFSWithLocalReader: IPFSHostWithLocalReader
   }
 });
 
