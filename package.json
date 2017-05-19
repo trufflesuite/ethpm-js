@@ -1,6 +1,6 @@
 {
   "name": "ethpm",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Ethereum Package Installer and Publishing Library",
   "main": "index.js",
   "scripts": {
