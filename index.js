@@ -17,8 +17,8 @@ function EthPM(directory, host, registry) {
   this.config = Config.default().with({
     working_directory: directory,
     base_dir: directory,
-    host: host,
-    registry: registry
+    host: this.host,
+    registry: this.registry
   });
 };
 
