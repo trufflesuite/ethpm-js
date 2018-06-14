@@ -28,7 +28,7 @@ describe("Dependency Conflict", function() {
   });
 
   before("published conflicting dependencies", function() {
-    this.timeout(10000);
+    this.timeout(25000);
 
     return owned1.package.publish().then(function() {
       return owned2.package.publish();
@@ -41,6 +41,8 @@ describe("Dependency Conflict", function() {
   });
 
   it("installs should fail during installation due to conflicting dependencies", function(done) {
+    this.timeout(25000);
+
     conflict.package.install().then(function() {
       return done(new Error("This error shouldn't be evaluated because another error should have come before it."));
     }).catch(function(e) {

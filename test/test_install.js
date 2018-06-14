@@ -25,12 +25,14 @@ describe("Install", function() {
   });
 
   before("published owned for use as a dependency", function() {
-    this.timeout(10000);
+    this.timeout(25000);
 
     return owned.package.publish(owned.contract_metadata);
   });
 
   it("installs eth-usd correctly with owned as a dependency", function() {
+    this.timeout(25000);
+
     var dependency_path = path.resolve(path.join(eth_usd.package.config.installed_packages_directory, "owned"));
 
     return eth_usd.package.install().then(function() {
