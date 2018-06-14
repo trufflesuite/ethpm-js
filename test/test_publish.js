@@ -27,7 +27,7 @@ describe("Publishing", function() {
   });
 
   it("published the correct lockfile, manifest file and source files", function() {
-    this.timeout(10000);
+    this.timeout(25000);
 
     var lockfile;
 
@@ -59,7 +59,7 @@ describe("Publishing", function() {
   });
 
   it("recognizes x-* options in the manifest and includes them in lockfile", function() {
-    this.timeout(10000);
+    this.timeout(25000);
 
     var lockfile;
 
@@ -77,6 +77,8 @@ describe("Publishing", function() {
   });
 
   it("correctly publishes packages with dependencies", function(){
+    this.timeout(25000);
+
     // First install any dependencies.
     return eth_usd.package.install().then(function() {
       return Sources.findDirectories(eth_usd.package.config.installed_packages_directory);

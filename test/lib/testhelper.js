@@ -4,9 +4,9 @@ var Config = require("../../lib/config");
 var IPFSHost = require("../../lib/hosts/ipfshost");
 var MemoryRegistry = require("../../lib/registries/memoryregistry");
 var Manifest = require("../../lib/manifest.js");
+
+var fs = require('fs-extra');
 var path = require("path");
-var promisify = require("promisify-node");
-var fs = promisify(require("fs-extra"));
 var solc = require("solc");
 var dir = require("node-dir");
 var each = require("async/each");

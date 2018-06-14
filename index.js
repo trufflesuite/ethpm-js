@@ -5,8 +5,8 @@ var IPFSHost = require("./lib/hosts/ipfshost");
 var IPFSHostWithLocalReader = require("./lib/hosts/ipfshostwithlocalreader");
 var MemoryRegistry = require("./lib/registries/memoryregistry");
 var Config = require("./lib/config");
-var promisify = require("promisify-node");
-var fs = promisify(require("fs-extra"));
+
+var fs = require('fs-extra');
 var path = require("path");
 var _ = require("lodash");
 
