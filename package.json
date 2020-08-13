@@ -18,7 +18,7 @@
   "homepage": "https://github.com/ethpm/ethpm-js#readme",
   "devDependencies": {
     "finalhandler": "^0.5.1",
-    "ipfsd-ctl": "^0.17.0",
+    "ipfsd-ctl": "^0.21.0",
     "mocha": "^3.1.2",
     "solc": "^0.4.4",
     "temp": "^0.8.3"
@@ -30,9 +30,9 @@
     "glob": "^7.1.1",
     "ipfs-mini": "^1.1.2",
     "jsonschema": "^1.1.1",
-    "lodash": "^4.17.1",
+    "lodash": "^4.17.20",
     "node-dir": "^0.1.16",
     "semver": "^5.3.0",
-    "wget-improved": "^1.4.0"
+    "wget-improved": "^1.5.0"
   }
 }
