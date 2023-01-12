@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/ethpm/ethpm-js#readme",
   "devDependencies": {
-    "finalhandler": "^0.5.1",
+    "finalhandler": "^1.2.0",
     "ipfsd-ctl": "^0.21.0",
-    "mocha": "^3.1.2",
+    "mocha": "^10.2.0",
     "solc": "^0.4.4",
     "temp": "^0.8.3"
   },
